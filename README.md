@@ -1,4 +1,4 @@
-# Lobo Werewolf Hub
+# LoboWerewolf Hub
 
 **LoboWerewolfHub** is a foundational module designed to act as a centralized *Scene Control Button* hub for other related modules.
 
