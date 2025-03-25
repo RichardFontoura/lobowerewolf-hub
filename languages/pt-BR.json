@@ -1,0 +1,8 @@
+{
+  "Werewolf": {
+    "HubTitle": "Hub do LoboWerewolf",
+    "Initializing": "lobowerewolf-hub | Inicializando Hub do LoboWerewolf",
+    "ToolRegisterError": "lobowerewolf-hub | Falha ao registrar ferramenta: dados inválidos",
+    "ToolRegistered": "lobowerewolf-hub | Ferramenta registrada com sucesso: {name}"
+  }
+}
