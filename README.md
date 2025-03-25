@@ -2,7 +2,7 @@
 
 **LoboWerewolfHub** is a foundational module designed to act as a centralized *Scene Control Button* hub for other related modules.
 
-It creates a new Scene Controls category and allows other modules to register custom tools (buttons) to it. This ensures a clean and unified user interface experience when managing multiple features related to your werewolf-themed systems.
+It creates a new Scene Controls category and allows other modules to register custom tools (buttons) to it.
 
 ---
 
