@@ -1,0 +1,384 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --primary-color: #782e22;
+    --primary-dark: #5a231a;
+    --primary-light: #9a3b2c;
+    --secondary-color: #2c3e50;
+    --accent-color: #f39c12;
+    --text-color: #333;
+    --text-light: #666;
+    --bg-color: #f8f9fa;
+    --card-bg: #ffffff;
+    --border-radius: 12px;
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.12);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.15);
+    --transition-normal: all 0.3s ease;
+}
+
+.about-container {
+    font-family: 'Poppins', sans-serif;
+    color: var(--text-color);
+    background: var(--bg-color);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    position: relative;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+/* Header Section */
+.about-header {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    padding: 1.5rem 2rem;
+    text-align: center;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.about-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"%3E%3Cpath fill="%23ffffff" fill-opacity="0.05" d="M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"%3E%3C/path%3E%3C/svg%3E');
+    background-size: cover;
+    background-position: center bottom;
+    opacity: 0.2;
+}
+
+.logo-container {
+    margin: 0 auto 0.5rem;
+    width: 60px;
+    height: 60px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-md);
+    position: relative;
+    z-index: 1;
+}
+
+.logo-icon {
+    font-size: 2rem;
+    color: var(--primary-color);
+}
+
+.about-header h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 0;
+    position: relative;
+    z-index: 1;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.about-subtitle {
+    font-size: 0.9rem;
+    font-weight: 300;
+    opacity: 0.9;
+    margin-top: 0.3rem;
+    position: relative;
+    z-index: 1;
+}
+
+/* Social Links Section */
+.social-links-container {
+    padding: 1rem;
+    background: var(--card-bg);
+    box-shadow: var(--shadow-sm);
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.social-links a {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1.2rem;
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--transition-normal);
+    box-shadow: var(--shadow-sm);
+    min-width: 160px;
+    justify-content: center;
+}
+
+.social-links a i {
+    margin-right: 0.8rem;
+    font-size: 1.1rem;
+    color: black; /* Added to ensure icons are black */
+}
+
+.social-links a span {
+    white-space: nowrap;
+    font-size: 0.9rem;
+    color: black; /* Added to ensure text is black */
+}
+
+.patreon-link {
+    background: #f96854;
+    color: black; /* This was already changed */
+}
+
+.patreon-link:hover {
+    background: #e55b47;
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+    color: black; /* Added to maintain black text on hover */
+}
+
+.discord-link {
+    background: #5865F2;
+    color: black; /* This was already changed */
+}
+
+.discord-link:hover {
+    background: #4752c4;
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+    color: black; /* Added to maintain black text on hover */
+}
+
+/* Modules Section */
+.modules-section {
+    padding: 0 1.5rem 1.5rem;
+}
+
+.section-header {
+    text-align: center;
+    margin: 1rem 0;
+    position: relative;
+}
+
+.section-header h3 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--secondary-color);
+    margin: 0 0 0.3rem;
+}
+
+.section-divider {
+    height: 3px;
+    width: 50px;
+    background: var(--primary-color);
+    margin: 0 auto;
+    border-radius: 3px;
+}
+
+.modules-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+    overflow-y: auto;
+    padding-right: 0.5rem;
+    max-height: 250px; /* Fixed height that works for all content */
+    min-height: 150px; /* Minimum height for few modules */
+}
+
+/* Remove the few-modules class styling since we want consistent behavior */
+.modules-list.few-modules {
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+.module-item {
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition-normal);
+    position: relative;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+}
+
+.module-item:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+}
+
+.module-badge {
+    position: absolute;
+    top: 0.2rem;  /* Moved up from 1rem */
+    right: 0.7rem;
+    z-index: 2;
+}
+
+.version {
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: white;
+    background: var(--primary-color);
+    padding: 0.2rem 0.4rem;
+    border-radius: 20px;
+    box-shadow: var(--shadow-sm);
+}
+
+.module-header {
+    padding: 1.2rem 1.2rem 0.3rem;
+    display: flex;
+    align-items: center;
+}
+
+.module-icon {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 0.8rem;
+    color: white;
+    font-size: 1rem;
+    box-shadow: var(--shadow-sm);
+    flex-shrink: 0;
+}
+
+.module-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--secondary-color);
+    flex-grow: 1;
+    line-height: 1.3;
+}
+
+.module-link {
+    color: inherit;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: color 0.2s;
+}
+
+.module-link:hover {
+    color: var(--primary-color);
+}
+
+.module-link-icon {
+    font-size: 0.8rem;
+    opacity: 0.7;
+}
+
+.module-description {
+    padding: 0.3rem 1.2rem 1.2rem;
+    color: var(--text-light);
+    font-size: 0.85rem;
+    line-height: 1.5;
+    flex-grow: 1;
+}
+
+.module-description p {
+    margin: 0;
+}
+
+/* Footer Section */
+.about-footer {
+    background: var(--secondary-color);
+    color: white;
+    padding: 0.8rem;
+    text-align: center;
+}
+
+.footer-content p {
+    margin: 0;
+    opacity: 0.9;
+    font-size: 0.8rem;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.about-container {
+    animation: fadeIn 0.6s ease-out;
+}
+
+.module-item {
+    animation: fadeIn 0.6s ease-out;
+    animation-fill-mode: both;
+}
+
+.module-item:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.module-item:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.module-item:nth-child(4) {
+    animation-delay: 0.3s;
+}
+
+.module-item:nth-child(5) {
+    animation-delay: 0.4s;
+}
+
+/* Scrollbar styling */
+.modules-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.modules-list::-webkit-scrollbar-track {
+    background: rgba(0,0,0,0.05);
+    border-radius: 10px;
+}
+
+.modules-list::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 10px;
+}
+
+.about-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.about-container::-webkit-scrollbar-track {
+    background: rgba(0,0,0,0.05);
+}
+
+.about-container::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 10px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .modules-list {
+        grid-template-columns: 1fr;
+    }
+    
+    .social-links {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .social-links a {
+        width: 100%;
+        max-width: 250px;
+    }
+}

@@ -3,7 +3,7 @@
     "name": "lobowerewolf-hub",
     "title": "LoboWerewolf Hub",
     "description": "A central hub for LoboWerewolf modules.",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "authors": [
         {
             "name": "lobowarewolf",
@@ -16,6 +16,9 @@
     },
     "esmodules": [
         "main.js"
+    ],
+    "styles": [
+        "styles/about-form.css"
     ],
     "languages": [
         {
@@ -30,6 +33,6 @@
         }
     ],
     "url": "https://github.com/RichardFontoura/lobowerewolf-hub",
-    "manifest": "https://github.com/RichardFontoura/lobowerewolf-hub/releases/download/1.0.0/module.json",
-    "download": "https://github.com/RichardFontoura/lobowerewolf-hub/releases/download/1.0.0/lobowerewolf-hub.zip"
+    "manifest": "https://github.com/RichardFontoura/lobowerewolf-hub/releases/download/1.0.1/module.json",
+    "download": "https://github.com/RichardFontoura/lobowerewolf-hub/releases/download/1.0.1/lobowerewolf-hub.zip"
 }
