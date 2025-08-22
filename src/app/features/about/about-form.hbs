@@ -4,34 +4,34 @@
             <div class="logo-container">
                 <i class="fa-brands fa-wolf-pack-battalion logo-icon"></i>
             </div>
-            <h2>LoboWerewolf</h2>
-            <div class="about-subtitle">Premium Tools for Foundry VTT</div>
+            <h2>{{localize 'lobowerewolf-hub.about.heading'}}</h2>
+            <div class="about-subtitle">{{localize 'lobowerewolf-hub.about.tagline'}}</div>
         </div>
-        
+
         <div class="social-links-container">
             <div class="social-links">
                 <a href="https://www.patreon.com/lobowerewolf" target="_blank" class="patreon-link">
                     <i class="fab fa-patreon"></i>
-                    <span>Patreon</span>
+                    <span>{{localize 'lobowerewolf-hub.about.links.patreon'}}</span>
                 </a>
                 <a href="https://discord.gg/Ttw59kWX4B" target="_blank" class="discord-link">
                     <i class="fab fa-discord"></i>
-                    <span>Join Discord</span>
+                    <span>{{localize 'lobowerewolf-hub.about.links.discord'}}</span>
                 </a>
             </div>
         </div>
 
         <div class="modules-section">
             <div class="section-header">
-                <h3>Our Modules</h3>
+                <h3>{{localize 'lobowerewolf-hub.about.sections.our-modules'}}</h3>
                 <div class="section-divider"></div>
             </div>
-            
+
             <div class="modules-list {{#if (lte modules.length 3)}}few-modules{{/if}}">
                 {{#each modules}}
                 <div class="module-item">
                     <div class="module-badge">
-                        <span class="version">v{{this.version}}</span>
+                        <span class="version">{{localize 'lobowerewolf-hub.about.versionPrefix'}}{{this.version}}</span>
                     </div>
                     <div class="module-header">
                         <div class="module-icon">
@@ -55,10 +55,10 @@
                 {{/each}}
             </div>
         </div>
-        
+
         <div class="about-footer">
             <div class="footer-content">
-                <p>© 2025 LoboWerewolf</p>
+                <p>{{localize 'lobowerewolf-hub.about.footer.copyright'}}</p>
             </div>
         </div>
     </div>

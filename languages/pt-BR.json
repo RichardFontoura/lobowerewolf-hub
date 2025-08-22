@@ -1,8 +1,24 @@
 {
-  "Werewolf": {
-    "HubTitle": "Hub do LoboWerewolf",
-    "Initializing": "lobowerewolf-hub | Inicializando Hub do LoboWerewolf",
-    "ToolRegisterError": "lobowerewolf-hub | Falha ao registrar ferramenta: dados inválidos",
-    "ToolRegistered": "lobowerewolf-hub | Ferramenta registrada com sucesso: {name}"
+  "lobowerewolf-hub": {
+    "hub-title": "Hub do LoboWerewolf",
+    "initializing": "lobowerewolf-hub | Inicializando Hub do LoboWerewolf",
+    "tool-register-error": "lobowerewolf-hub | Falha ao registrar ferramenta: dados inválidos",
+    "tool-registered": "lobowerewolf-hub | Ferramenta registrada com sucesso: {name}",
+    "about-title": "Sobre o LoboWerewolf",
+    "about": {
+      "heading": "LoboWerewolf",
+      "tagline": "Ferramentas Premium para Foundry VTT",
+      "links": {
+        "patreon": "Patreon",
+        "discord": "Entrar no Discord"
+      },
+      "sections": {
+        "our-modules": "Nossos Módulos"
+      },
+      "versionPrefix": "v",
+      "footer": {
+        "copyright": "© 2025 LoboWerewolf"
+      }
+    }
   }
 }
