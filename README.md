@@ -24,5 +24,5 @@ The API allows registering tools with `hub?.setTool({ name, title, icon, button,
 
 ## 📄 License
 
-- **Author:** lobowarewolf (<mcurl name="https://www.patreon.com/LoboWerewolf" url="https://www.patreon.com/LoboWerewolf"></mcurl>)
+- **Author:** lobowarewolf (https://www.patreon.com/LoboWerewolf)
 - **License:** ISC
