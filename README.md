@@ -1,154 +1,28 @@
 # LoboWerewolf Hub
 
-LoboWerewolf Hub is a foundational module that provides a new category in Foundry VTT's Scene Controls and a central point for other modules to register custom tools (buttons).
+LoboWerewolf Hub is a foundational module for Foundry VTT, providing a new category in Scene Controls and a central point for registering custom tools. This version has been migrated to TypeScript, with a reorganized project structure and updated API.
 
-This repository has been migrated to TypeScript and undergone a reorganization of its structure, build process, and public API.
+## 🚀 Key Changes in Version 3
 
-## 🔧 Technical requirements
+- **TypeScript Migration:** Project rewritten in TypeScript, using `esbuild` for the build process.
+- **Folder Structure:** Source code in `src/`, with resources (templates, styles, languages) copied to `dist/` during build. Packaging is done via `scripts/zip.js`.
+- **Updated API:** The API is now accessed via `game.modules.get('lobowerewolf-hub').api.hub`, with improved validation for tool registration.
+- **Module Configuration:** Compatibility with Foundry VTT v13, with `esmodules: ["main.js"]` and references to languages/styles in the final package.
+- **Internationalization:** i18n keys now use the `lobowerewolf-hub.*` namespace.
+- **Git:** `.gitignore` and `.gitattributes` configured to ignore build files and normalize text.
 
-- Node.js 20 LTS or higher (recommended)
-  - Build tools and utilities (e.g., rimraf v6, esbuild, and dependencies) require recent Node versions
-- NPM 9+ (recommended)
-- Foundry VTT 13 (minimum and verified compatibility in `module.json`)
+## 🔧 Requirements and Setup
 
-## 📦 Folder structure
-
-- `src/`
-  - `app/core/` (hub types and services)
-    - `services/LoboWerewolfHub.ts`: main service that registers the control and manages tools
-    - `types/`: types for forms, controls, and API
-  - `app/features/about/`
-    - `about-form.hbs`: "About" screen template
-    - `about-form.css`: "About" screen styles
-    - `AboutForm.ts`: "About" screen logic
-  - `utils/helpers.ts`: helpers (i18n, module access, Handlebars, etc.)
-  - `main.ts`: entry point; registers helpers, creates the hub, and exposes API via `module.api`
-
-- `languages/`
-  - `en.json` and `pt-BR.json` (keys in the `lobowerewolf-hub` namespace)
-
-- `scripts/`
-  - `zip.js`: packages the contents of `dist/` into `lobowerewolf-hub.zip`
-
-- `dist/` (generated during build)
-  - `main.js` and `main.js.map` (ESM bundle)
-  - `module.json` (copied during build)
-  - `languages/`, `templates/`, `styles/` (copied from `languages/` and `src/app/features/**`)
-
-## ⚙️ How to set up and run
-
-1) Install dependencies
-```bash
-npm install
-```
-
-2) Build the project (generates `dist/` with bundle and copied files)
-```bash
-npm run build
-```
-
-3) Use in Foundry VTT (local development)
-- After building, copy the contents of `dist/` to the module folder in Foundry, for example:
-  - Windows: `%AppData%\FoundryVTT\Data\modules\lobowerewolf-hub\`
-- Alternatively, generate the `.zip` and install via "Install Module" with the manifest URL when publishing a release.
-
-4) Generate `.zip` package for distribution
-```bash
-npm run build:zip
-```
-- The script creates `lobowerewolf-hub.zip` in the project root, containing the `dist/` files at the package root (expected structure by Foundry).
-
-Available scripts:
-- `npm run clean`: removes the `dist/` folder
-- `npm run copy`: copies templates, styles, languages, and `module.json` to `dist/`
-- `npm run build`: clean + copy + bundle via esbuild
-- `npm run build:zip`: build + packaging (`scripts/zip.js`)
-- `npm run zip`: only packages the current contents of `dist/`
+- **Requirements:** Node.js 20+ and NPM 9+.
+- **Installation:** `npm install` for dependencies.
+- **Build:** `npm run build` to compile the project to the `dist/` folder.
+- **Usage in Foundry VTT:** Copy the contents of `dist/` to the Foundry module folder or use `npm run build:zip` to generate a `.zip` for installation.
 
 ## 🧩 Public API
 
-The Hub's API is exposed via `module.api` in Foundry:
-
-```javascript
-// Access the hub from another module
-const hub = game.modules.get("lobowerewolf-hub")?.api?.hub;
-
-// Register a tool
-hub?.setTool({
-  name: "transform",
-  title: game.i18n.localize("MyModule.TransformTitle"),
-  icon: "fa-solid fa-paw",
-  button: true,          // clickable button
-  visible: true,         // visible in the panel
-  // toggle: true,       // optional, if it's a toggle
-  // order: 2,           // optional; if omitted, the hub calculates automatically
-  onClick: () => {
-    console.log("Transform button clicked!");
-  }
-  // onChange: () => {}, // alternative to onClick; one of the two is required
-});
-```
-
-Rules and behaviors:
-- Required fields: `name`, `title`, `icon`, and at least one handler (`onClick` or `onChange`).
-- `order`: if not defined, the Hub calculates a value based on the number of tools already registered.
-- The Hub creates a control category named `lobowerewolfhub`:
-  - Localized title: `lobowerewolf-hub.hub-title`
-  - Icon: `fas fa-paw`
-  - Default tool: `defaultTool`
-  - "About" button: `aboutButton` (opens the window with a module list)
-
-## 🧰 Helpers and i18n
-
-- Helpers:
-  - Automatic registration of Handlebars helpers on init, including the `lte` (<=) helper.
-- i18n:
-  - Updated namespace: `lobowerewolf-hub.*`
-    - E.g., `lobowerewolf-hub.initializing`, `lobowerewolf-hub.tool-registered`, `lobowerewolf-hub.about.*`
-
-## 🧷 Module settings (module.json)
-
-- Compatibility
-  - `minimum`: `13`
-  - `verified`: `13`
-- Bundle loading:
-  - `esmodules: ["main.js"]` (in the final package, `main.js` is at the root)
-- Resources:
-  - `styles: ["styles/about/about-form.css"]` (copied to `dist/styles/...`)
-  - `languages`: `languages/en.json` and `languages/pt-BR.json`
-- Distribution:
-  - `manifest` and `download` fields point to the GitHub Releases publication for the current version.
-
-## 🔄 Differences from previous version
-
-- API
-  - Before: suggested global access (e.g., `game.lobowerewolfHub.registerTool(...)`)
-  - Now: `game.modules.get('lobowerewolf-hub').api.hub.setTool(...)`
-  - Stricter tool data validation (name/title/icon + onClick/onChange)
-
-- Scene Controls
-  - Icon changed to `fas fa-paw`
-  - Title now localized via `lobowerewolf-hub.hub-title`
-  - Inclusion of the "About" button with Handlebars window
-
-- Build and structure
-  - TypeScript project, bundling with esbuild
-  - Resources (.hbs/.css/.json) copied to `dist/` during build
-  - Packaging via `scripts/zip.js` (generates `lobowerewolf-hub.zip`)
-
-- i18n
-  - Keys migrated to the `lobowerewolf-hub.*` namespace
-
-## ❓ Troubleshooting
-
-- "Command not found" or build errors
-  - Verify that you are using Node.js 20+ and updated NPM
-- Foundry does not load the module
-  - Confirm that you installed the package with the correct structure: `module.json`, `main.js`, `languages/`, `templates/`, `styles/` at the module root
-- i18n issues
-  - Review if the keys use the `lobowerewolf-hub.*` namespace
+The API allows registering tools with `hub?.setTool({ name, title, icon, button, visible, onClick/onChange })`. Required fields include name, title, icon, and a click/change handler. The Hub creates a `lobowerewolfhub` control category with a `fas fa-paw` icon and an integrated "About" button. 
 
 ## 📄 License
 
-- Author: lobowarewolf (https://www.patreon.com/LoboWerewolf)
-- License: ISC
+- **Author:** lobowarewolf (<mcurl name="https://www.patreon.com/LoboWerewolf" url="https://www.patreon.com/LoboWerewolf"></mcurl>)
+- **License:** ISC
