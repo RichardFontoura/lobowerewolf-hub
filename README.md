@@ -4,49 +4,12 @@ LoboWerewolf Hub is a foundational module that provides a new category in Foundr
 
 This repository has been migrated to TypeScript and undergone a reorganization of its structure, build process, and public API.
 
----
-
-## 🚀 What's new in version 3
-
-- Full migration to TypeScript
-  - New tsconfig: `c:\lobowerewolf-hub\tsconfig.json` (paths, strict, Node and Foundry types)
-  - Build scripts with `esbuild` (ESM bundle + sourcemaps)
-  - `package.json` and `package-lock.json` updated
-
-- New folder structure
-  - Source code in `src/`
-  - Resources (templates, styles, and languages) copied to `dist/` during build
-  - Packaging script in `scripts/zip.js`
-
-- Updated API and behavior
-  - API exposed via `game.modules.get('lobowerewolf-hub').api.hub`
-  - Tool registration with validation and automatic ordering
-  - Control category: `lobowerewolfhub` with `fas fa-paw` icon and title localized via `lobowerewolf-hub.hub-title`
-  - Inclusion of an "About" screen with a module list fetched dynamically
-
-- Module configuration (module.json)
-  - Compatibility for Foundry VTT v13
-  - `esmodules: ["main.js"]` (loaded from the module root in the final package)
-  - Languages and styles referenced in the generated package
-
-- Internationalization
-  - i18n keys now use the `lobowerewolf-hub.*` namespace
-    - E.g., `lobowerewolf-hub.hub-title`, `lobowerewolf-hub.tool-registered`, etc.
-
-- Git configuration files
-  - `.gitignore`: ignores `node_modules/`, `dist/`, and `package-lock.json`
-  - `.gitattributes`: text normalization
-
----
-
 ## 🔧 Technical requirements
 
 - Node.js 20 LTS or higher (recommended)
   - Build tools and utilities (e.g., rimraf v6, esbuild, and dependencies) require recent Node versions
 - NPM 9+ (recommended)
 - Foundry VTT 13 (minimum and verified compatibility in `module.json`)
-
----
 
 ## 📦 Folder structure
 
@@ -71,8 +34,6 @@ This repository has been migrated to TypeScript and undergone a reorganization o
   - `main.js` and `main.js.map` (ESM bundle)
   - `module.json` (copied during build)
   - `languages/`, `templates/`, `styles/` (copied from `languages/` and `src/app/features/**`)
-
----
 
 ## ⚙️ How to set up and run
 
@@ -103,8 +64,6 @@ Available scripts:
 - `npm run build`: clean + copy + bundle via esbuild
 - `npm run build:zip`: build + packaging (`scripts/zip.js`)
 - `npm run zip`: only packages the current contents of `dist/`
-
----
 
 ## 🧩 Public API
 
@@ -139,8 +98,6 @@ Rules and behaviors:
   - Default tool: `defaultTool`
   - "About" button: `aboutButton` (opens the window with a module list)
 
----
-
 ## 🧰 Helpers and i18n
 
 - Helpers:
@@ -148,8 +105,6 @@ Rules and behaviors:
 - i18n:
   - Updated namespace: `lobowerewolf-hub.*`
     - E.g., `lobowerewolf-hub.initializing`, `lobowerewolf-hub.tool-registered`, `lobowerewolf-hub.about.*`
-
----
 
 ## 🧷 Module settings (module.json)
 
@@ -163,8 +118,6 @@ Rules and behaviors:
   - `languages`: `languages/en.json` and `languages/pt-BR.json`
 - Distribution:
   - `manifest` and `download` fields point to the GitHub Releases publication for the current version.
-
----
 
 ## 🔄 Differences from previous version
 
@@ -186,8 +139,6 @@ Rules and behaviors:
 - i18n
   - Keys migrated to the `lobowerewolf-hub.*` namespace
 
----
-
 ## ❓ Troubleshooting
 
 - "Command not found" or build errors
@@ -196,8 +147,6 @@ Rules and behaviors:
   - Confirm that you installed the package with the correct structure: `module.json`, `main.js`, `languages/`, `templates/`, `styles/` at the module root
 - i18n issues
   - Review if the keys use the `lobowerewolf-hub.*` namespace
-
----
 
 ## 📄 License
 
