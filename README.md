@@ -150,5 +150,5 @@ Rules and behaviors:
 
 ## 📄 License
 
-- Author: lobowarewolf (https://www.patreon.com/lobowarewolf)
+- Author: lobowarewolf (https://www.patreon.com/LoboWerewolf)
 - License: ISC
