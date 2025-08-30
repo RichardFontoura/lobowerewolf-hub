@@ -326,16 +326,6 @@
   border-radius: 10px;
 }
 
-@media (max-width: 768px) {
-  .modules-list {
-    grid-template-columns: 1fr;
-  }
-  .social-links {
-    flex-direction: column;
-    align-items: center;
-  }
-  .social-links a {
-    width: 100%;
-    max-width: 250px;
-  }
+button[data-tool="werewolf-foreground"] {
+  display: none !important;
 }

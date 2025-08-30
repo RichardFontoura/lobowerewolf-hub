@@ -1,13 +1,9 @@
 import { i18nLocalize as l, i18nLocalizeFormat as lf } from "@helpers";
 import { AboutForm } from "app/features/about/AboutForm";
-import { Tool } from "../types/controls.types";
 
-import type { SceneControlsUI } from "../types/controls.types";
+import type { Tool, SceneControlsUI } from "../types/controls.types";
 
-// Using "unsafe" typing only for this .on since getSceneControlButtons is not yet accessible via fvtt-types
-type UnsafeHooks = {
-  on(hook: string, fn: (...args: any[]) => any, options?: any): number;
-};
+type UnsafeHooks = { on(hook: "getSceneControlButtons", fn: (controls: Record<string, SceneControlsUI>) => void, options?: any): number; };
 
 export class LoboWerewolfHub {
   private registeredTools = new Map<string, Tool>();
@@ -15,11 +11,8 @@ export class LoboWerewolfHub {
   constructor() {
     this.registerDefaultTools();
 
-    (Hooks as unknown as UnsafeHooks).on(
-      "getSceneControlButtons",
-      (controls: Record<string, SceneControlsUI>) => {
-        this.registerControls(controls);
-      }
+    (Hooks as unknown as UnsafeHooks).on("getSceneControlButtons", (controls) =>
+      this.registerControls(controls)
     );
   }
 
@@ -32,7 +25,7 @@ export class LoboWerewolfHub {
         button: false,
         visible: true,
         order: 0,
-        onChange: () => {},
+        onChange: (_event?: Event, _active?: boolean) => {},
       },
       {
         name: "aboutButton",
@@ -53,7 +46,7 @@ export class LoboWerewolfHub {
   }
 
   private registerControls(controls: Record<string, SceneControlsUI>) {
-    const toolMap: Record<string, Tool> = {};
+    const toolMap: Record<string, Tool & { active?: boolean }> = {};
     for (const [key, tool] of this.registeredTools.entries()) {
       toolMap[key] = {
         name: key,
@@ -63,34 +56,50 @@ export class LoboWerewolfHub {
         toggle: tool.toggle,
         visible: tool.visible,
         order: tool.order,
-        onChange: tool.onChange ?? tool.onClick ?? (() => {}),
+        onChange: (event?: Event, active?: boolean) => {
+          if (typeof tool.onChange === "function")
+            return tool.onChange(event as any, active as any);
+          if (typeof tool.onClick === "function" && active)
+            return tool.onClick();
+        },
       };
     }
-    let activeToolName: string | undefined;
 
-    if ("defaultTool" in toolMap) {
-      activeToolName = "defaultTool";
+    if (!toolMap.foreground) {
+      toolMap.foreground = {
+        name: "werewolf-foreground",
+        title: "Foreground",
+        icon: "fa-solid fa-house",
+        toggle: true,
+        button: false,
+        // visible: true  ← keep visible (default). DO NOT use false.
+        order: 9999,
+        active: false,
+        onChange: (_ev?: Event, _active?: boolean) => {
+          // no-op - exists only so the core has .foreground.active
+        },
+      };
+    } else {
+      toolMap.foreground.toggle = true;
+      toolMap.foreground.active ??= false;
     }
 
-    const newControl: SceneControlsUI = {
+    let activeToolName: string | undefined;
+    if ("defaultTool" in toolMap) activeToolName = "defaultTool";
+
+    const newControl: SceneControlsUI & { layer?: string } = {
       name: "lobowerewolfhub",
       title: l("hub-title"),
       icon: "fas fa-paw",
       order: this.getControlsCount(controls) + 1,
       visible: true,
+      layer: "tokens",
       activeTool: activeToolName,
-      tools: toolMap,
-      onChange: () => {},
+      tools: toolMap as unknown as Record<string, Tool>,
+      onChange: (_event?: Event, _active?: boolean) => {},
     };
 
-    if (Array.isArray(controls)) {
-      controls.push(newControl);
-    } else if (controls instanceof Map) {
-      controls.set("lobowerewolfhub", newControl);
-    } else if (controls && typeof controls === "object") {
-      (controls as Record<string, SceneControlsUI>)["lobowerewolfhub"] =
-        newControl;
-    }
+    controls["lobowerewolfhub"] = newControl;
   }
 
   private getControlsCount(
@@ -130,11 +139,7 @@ export class LoboWerewolfHub {
     tool.order = finalOrder;
 
     this.registeredTools.set(tool.name, tool);
-
     console.log(lf("tool-registered", { name: tool.name }));
-
-    const controlsUI = ui?.controls as unknown as Record<string, SceneControlsUI>;
-    if (controlsUI) this.registerControls(controlsUI);
   }
 
   getTools() {
