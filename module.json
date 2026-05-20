@@ -2,20 +2,20 @@
   "id": "lobowerewolf-hub",
   "title": "LoboWerewolf Hub",
   "description": "A central hub for LoboWerewolf modules.",
-  "version": "3.0.1",
+  "version": "4.0.0",
   "socket": true,
   "authors": [
     {
-      "name": "lobowarewolf",
-      "url": "https://www.patreon.com/lobowarewolf"
+      "name": "LoboWerewolf",
+      "url": "https://www.patreon.com/cw/LoboWerewolf"
     }
   ],
   "compatibility": {
     "minimum": "13",
-    "verified": "13"
+    "verified": "14"
   },
   "esmodules": ["main.js"],
-  "styles": ["styles/about/about-form.css"],
+  "styles": ["styles/about/about-form.css", "styles/sidebar/sidebar.css"],
   "languages": [
     {
       "lang": "en",
@@ -29,6 +29,6 @@
     }
   ],
   "url": "https://github.com/RichardFontoura/lobowerewolf-hub",
-  "manifest": "https://github.com/RichardFontoura/lobowerewolf-hub/releases/download/3.0.1/module.json",
-  "download": "https://github.com/RichardFontoura/lobowerewolf-hub/releases/download/3.0.1/lobowerewolf-hub.zip"
+  "manifest": "https://github.com/RichardFontoura/lobowerewolf-hub/releases/download/4.0.0/module.json",
+  "download": "https://github.com/RichardFontoura/lobowerewolf-hub/releases/download/4.0.0/lobowerewolf-hub.zip"
 }

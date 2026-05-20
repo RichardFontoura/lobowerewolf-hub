@@ -2,11 +2,14 @@ import { i18nLocalize as l, i18nLocalizeFormat as lf } from "@helpers";
 import { AboutForm } from "app/features/about/AboutForm";
 
 import type { Tool, SceneControlsUI } from "../types/controls.types";
+import type { SidebarTab } from "../types/sidebar.types";
 
 type UnsafeHooks = { on(hook: "getSceneControlButtons", fn: (controls: Record<string, SceneControlsUI>) => void, options?: any): number; };
 
 export class LoboWerewolfHub {
   private registeredTools = new Map<string, Tool>();
+  private registeredSidebarTabs = new Map<string, SidebarTab>();
+  private _readyFired = false;
 
   constructor() {
     this.registerDefaultTools();
@@ -144,5 +147,89 @@ export class LoboWerewolfHub {
 
   getTools() {
     return this.registeredTools;
+  }
+
+  // ── Sidebar API ─────────────────────────────────────────────────────────────
+
+  setSidebarTab(tab: SidebarTab): void {
+    if (!tab.name || !tab.title || !tab.icon || typeof tab.onRender !== "function") {
+      console.error("[LoboWerewolfHub] Invalid sidebar tab registration:", {
+        name: tab.name,
+        title: tab.title,
+        icon: tab.icon,
+      });
+      return;
+    }
+
+    this.registeredSidebarTabs.set(tab.name, tab);
+    console.log(`[LoboWerewolfHub] Sidebar tab registered: ${tab.name}`);
+
+    if (this._readyFired) {
+      this._injectSidebarTab(tab);
+    }
+  }
+
+  getSidebarTabs(): Map<string, SidebarTab> {
+    return this.registeredSidebarTabs;
+  }
+
+  injectSidebarTabs(): void {
+    this._readyFired = true;
+    for (const tab of this.registeredSidebarTabs.values()) {
+      this._injectSidebarTab(tab);
+    }
+  }
+
+  private _injectSidebarTab(tab: SidebarTab): void {
+    const btnId = `lw-sidebar-${tab.name}`;
+    const sectionId = `lw-sidebar-${tab.name}-content`;
+
+    const renderContent = () => {
+      const section = document.getElementById(sectionId);
+      if (!section) return;
+      section.classList.remove("inert");
+      section.removeAttribute("inert");
+      void Promise.resolve(tab.onRender(section));
+    };
+
+    if (!document.getElementById(btnId)) {
+      const settingsLi = document
+        .querySelector("#sidebar nav menu li [data-tab='settings']")
+        ?.closest("li");
+      const li = document.createElement("li");
+      li.id = btnId;
+      li.innerHTML =
+        `<button type="button" class="ui-control plain icon ${tab.icon}"` +
+        ` data-action="tab" data-tab="${tab.name}" role="tab"` +
+        ` aria-pressed="false" data-group="primary"` +
+        ` aria-label="${tab.title}" data-tooltip="${tab.title}"></button>` +
+        `<div class="notification-pip"></div>`;
+
+      if (settingsLi) {
+        settingsLi.before(li);
+      } else {
+        document.querySelector("#sidebar nav menu")?.appendChild(li);
+      }
+    }
+
+    const tabLi = document.getElementById(btnId);
+    const tabBtn = tabLi?.querySelector("button");
+    if (tabBtn && tabBtn.dataset.lwTabBound !== "1") {
+      tabBtn.dataset.lwTabBound = "1";
+      tabBtn.addEventListener("click", () => {
+        requestAnimationFrame(() => renderContent());
+      });
+    }
+
+    if (!document.getElementById(sectionId)) {
+      const section = document.createElement("section");
+      section.id = sectionId;
+      section.classList.add("tab", "sidebar-tab", "directory", "flexcol", "lw-sidebar-tab");
+      section.setAttribute("data-tab", tab.name);
+      section.setAttribute("data-group", "primary");
+      document.querySelector("#sidebar-content")?.appendChild(section);
+    }
+
+    renderContent();
   }
 }

@@ -7,10 +7,12 @@ Hooks.on("init", () => {
 
   const module = getModule() as Module;
   if (module) {
-    module.api = {
-      hub,
-    };
+    module.api = { hub };
   }
-  
+
+  Hooks.once("ready", () => {
+    hub.injectSidebarTabs();
+  });
+
   console.log("lobowerewolf-hub initialized");
 });
