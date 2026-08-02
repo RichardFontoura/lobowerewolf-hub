@@ -10,6 +10,7 @@ export class LoboWerewolfHub {
   private registeredTools = new Map<string, Tool>();
   private registeredSidebarTabs = new Map<string, SidebarTab>();
   private _readyFired = false;
+  private uiHandles = new Map<string, { tabName: string; renderPopout(): void }>();
 
   constructor() {
     this.registerDefaultTools();
@@ -180,7 +181,32 @@ export class LoboWerewolfHub {
     }
   }
 
+  private _ensureUiHandle(tab: SidebarTab): void {
+    const uiRegistry = ui as unknown as Record<string, unknown>;
+    const existing = uiRegistry[tab.name];
+
+    if (existing && !this.uiHandles.has(tab.name)) {
+      console.warn(
+        `[LoboWerewolfHub] ui["${tab.name}"] is already registered by something else; ` +
+          `sidebar tab "${tab.name}" may not switch correctly.`
+      );
+      return;
+    }
+
+    if (this.uiHandles.has(tab.name)) return;
+
+    const handle = {
+      tabName: tab.name,
+      renderPopout: () => {},
+    };
+
+    this.uiHandles.set(tab.name, handle);
+    uiRegistry[tab.name] = handle;
+  }
+
   private _injectSidebarTab(tab: SidebarTab): void {
+    this._ensureUiHandle(tab);
+
     const btnId = `lw-sidebar-${tab.name}`;
     const sectionId = `lw-sidebar-${tab.name}-content`;
 
