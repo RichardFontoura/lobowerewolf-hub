@@ -1,0 +1,71 @@
+LoboWerewolf Hub: End User License Agreement
+
+Copyright (c) 2025-2026 Richard Fontoura (LoboWerewolf)
+All rights reserved.
+
+1. Grant of licence
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of the LoboWerewolf Hub module ("the Software") from an official distribution
+channel, to download, install and use the Software with Foundry Virtual
+Tabletop, for personal or commercial play, for as long as this licence is not
+terminated.
+
+Official distribution channels are the releases published at
+https://github.com/RichardFontoura/lobowerewolf-hub/releases and the package
+listing at https://foundryvtt.com/packages/lobowerewolf-hub.
+
+2. Restrictions
+
+Except where a right is granted by mandatory applicable law, you may not:
+
+  a. redistribute, publish, mirror, sublicense, rent, lend or sell the
+     Software or any part of it, whether modified or unmodified;
+  b. modify, adapt, translate or create derivative works of the Software;
+  c. reverse engineer, decompile or disassemble the Software, or otherwise
+     attempt to derive its source code;
+  d. remove or alter any copyright, trademark or attribution notice contained
+     in the Software.
+
+Bundling the Software with, or having your own module depend on, the Software
+by declaring it as a Foundry VTT package relationship is expressly permitted,
+provided the end user obtains the Software from an official distribution
+channel.
+
+3. Ownership
+
+The Software is licensed, not sold. All title and intellectual property rights
+in and to the Software remain with Richard Fontoura (LoboWerewolf).
+
+4. Earlier versions
+
+Versions of the Software up to and including 4.0.1 were released under the ISC
+licence. This agreement does not retroactively alter the terms under which
+those versions were obtained; they remain available under the ISC licence.
+This agreement governs version 5.0.0 and every version released thereafter.
+
+5. Third-party components
+
+The Software includes third-party open source components distributed under
+their own licences, which continue to apply to those components. See
+THIRD-PARTY-NOTICES in the release archive where present.
+
+6. Disclaimer of warranty
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHOR OR COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+7. Termination
+
+This licence terminates automatically if you breach any of its terms. Upon
+termination you must cease using the Software and delete all copies in your
+possession.
+
+Foundry Virtual Tabletop is a trademark of Foundry Gaming LLC. This Software
+is an independent module and is not affiliated with or endorsed by Foundry
+Gaming LLC.
